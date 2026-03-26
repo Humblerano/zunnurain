@@ -3,314 +3,907 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zunnurain | YouTube Tutorials</title>
-    <link rel="stylesheet" href="tutor.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Young Engineer Zunnurain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;      /* Deep Navy Blue */
+            --secondary: #ffffff;     /* White */
+            --accent: #c9a227;        /* Gold */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(30, 58, 95, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            color: var(--secondary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-sub {
+            color: var(--accent);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-desktop a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--accent);
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-desktop a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Search Box */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--accent);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background-color: #b8941f;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 3rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        /* Course List */
+        .course-list {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .course-item {
+            background-color: var(--secondary);
+            border: 1px solid rgba(30, 58, 95, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(30, 58, 95, 0.1);
+            border-color: var(--accent);
+        }
+
+        .course-link {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .course-number {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent);
+            min-width: 40px;
+        }
+
+        .course-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .course-arrow {
+            width: 35px;
+            height: 35px;
+            background-color: rgba(30, 58, 95, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover .course-arrow {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .highlight {
+            background-color: rgba(201, 162, 39, 0.05);
+            border-color: var(--accent);
+        }
+
+        /* Links Section */
+        .links-section {
+            margin-bottom: 3rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .link-card {
+            background-color: rgba(30, 58, 95, 0.03);
+            border: 1px solid rgba(30, 58, 95, 0.1);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .link-card:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .link-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        /* Membership Banner */
+        .membership {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .membership h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .membership p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background-color: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.3);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .widget {
+            background-color: rgba(30, 58, 95, 0.03);
+            border: 1px solid rgba(30, 58, 95, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .widget-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .widget-subtitle {
+            font-size: 0.9rem;
+            color: rgba(30, 58, 95, 0.7);
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .triangle-box {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .triangle {
+            width: 120px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .triangle polygon {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 2;
+        }
+
+        .triangle text {
+            fill: var(--accent);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .widget-btn {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        /* A+ Widget */
+        .aplus-circle {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 1rem auto;
+        }
+
+        /* Stats */
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p {
+            opacity: 0.8;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .designer {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--primary);
+            padding: 5rem 2rem 2rem;
+            transition: right 0.3s ease;
+            z-index: 99;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 98;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-desktop {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Simple Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .course-item {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .course-item:nth-child(1) { animation-delay: 0.1s; }
+        .course-item:nth-child(2) { animation-delay: 0.2s; }
+        .course-item:nth-child(3) { animation-delay: 0.3s; }
+        .course-item:nth-child(4) { animation-delay: 0.4s; }
+        .course-item:nth-child(5) { animation-delay: 0.5s; }
+        .course-item:nth-child(6) { animation-delay: 0.6s; }
+        .course-item:nth-child(7) { animation-delay: 0.7s; }
+        .course-item:nth-child(8) { animation-delay: 0.8s; }
+        .course-item:nth-child(9) { animation-delay: 0.9s; }
+    </style>
 </head>
 <body>
-    <!-- Header / Navigation -->
+    <!-- Header -->
     <header class="header">
-        <nav class="nav container">
+        <div class="header-content">
             <a href="#" class="logo">
-                <span class="logo-icon">▶</span>
-                <span class="logo-text">Young Engineer Zunnurain</span>
+                <div class="logo-icon">⚡</div>
+                <div>
+                    <div class="logo-text">Young Engineer</div>
+                    <div class="logo-sub">Zunnurain</div>
+                </div>
             </a>
-            
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </nav>
+
+            <nav>
+                <ul class="nav-desktop">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Learn Easily with <span class="highlight">Young Engineer Zunnurain</span></h1>
-                <p class="hero-description">
-                    Welcome to Young Engineer Zunnurain Tutorials,
-                    where we explore Science and Technology topics
-                    including Mathematics, Physics, Engineering,
-                    and Electrical concepts through clear and
-                    engaging tutorials.
-                </p>
-                <a href="#tutorials" class="btn btn-primary">View Tutorials</a>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <span class="icon">💻</span>
-                    <span>Hassan</span>
-                </div>
-                <div class="floating-card card-2">
-                    <span class="icon">🎨</span>
-                    <span>Mathematics</span>
-                </div>
-                <div class="floating-card card-3">
-                    <span class="icon">⚡</span>
-                    <span>Physics</span>
-                </div>
-            </div>
+    <section class="hero" id="home">
+        <h1>Welcome to <span>Young Engineer Zunnurain</span></h1>
+        <p>Master mathematics, physics, and chemistry with comprehensive tutorials and resources designed for your success.</p>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search for courses, topics, or resources...">
+            <button class="search-btn">Search</button>
         </div>
     </section>
 
-    <!-- Tutorials Section -->
-    <section id="tutorials" class="tutorials">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Latest Tutorials</h2>
-                <p class="section-subtitle">Science and Technology Tutorial Videos
-                    Learn Mathematics, Physics, and Engineering concepts through clear and simple step-by-step tutorials.
-                    </p>
-            </div>
-            
-            <div class="tutorials-grid">
-                <!-- Tutorial Card 1 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=340&fit=crop" alt="React Tutorial Thumbnail">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">45:20</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">React Hooks Complete Guide</h3>
-                        <p class="card-description">Master useState, useEffect, and custom hooks with practical examples and best practices.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Tutorial Card 2 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=340&fit=crop" alt="CSS Grid Tutorial">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">32:15</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">CSS Grid Mastery</h3>
-                        <p class="card-description">Build complex layouts with ease. From basics to advanced grid techniques.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Tutorial Card 3 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=340&fit=crop" alt="JavaScript Tutorial">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">58:40</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">JavaScript ES6+ Features</h3>
-                        <p class="card-description">Modern JavaScript explained with real-world coding challenges and solutions.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Tutorial Card 4 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=340&fit=crop" alt="UI Design Tutorial">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">41:30</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">UI Design Principles</h3>
-                        <p class="card-description">Learn color theory, typography, and spacing to create beautiful interfaces.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Tutorial Card 5 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&h=340&fit=crop" alt="Node.js Tutorial">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">1:12:00</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Node.js Backend Basics</h3>
-                        <p class="card-description">Build REST APIs and server-side applications with Express and MongoDB.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Tutorial Card 6 -->
-                <article class="tutorial-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=340&fit=crop" alt="Git Tutorial">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <span class="duration">28:45</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Git & GitHub Workflow</h3>
-                        <p class="card-description">Version control essentials every developer needs to know. Branch, merge, and collaborate.</p>
-                        <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
-                            <span class="youtube-icon">▶</span>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <div class="image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face" alt="Alex - Tutor">
-                    </div>
-                </div>
-                <div class="about-content">
-                    <h2 class="section-title">Hi, I'm Usman</h2>
-                    <p class="about-text">
-                        My name Usman mustapha habib popularly known as
-                        Young Engineer Zunnurain. I am an Electrical Engineering student at
-                        Aliko Dangote University of Science and Technology.
-                        I am passionate about Science and Technology, and
-                        I create tutorials to help students understand
-                        Mathematics, Physics, and Engineering concepts
-                        through clear and simple explanations
-                    </p>
-                    <p class="about-text">
-                        With 200+ tutorials and 50,000+ students, I focus on practical, project-based learning 
-                        that prepares you for real-world challenges.
-                    </p>
-                    
-                    <div class="skills">
-                        <h3 class="skills-title">Expertise</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Physics</span>
-                            <span class="skill-tag">Mathematics</span>
-                            <span class="skill-tag">Computer</span>
-                            <span class="skill-tag">chemistry</span>
-                            <span class="skill-tag">Engineering courses</span>
-                            <span class="skill-tag"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Let's collaborate or just say hello</p>
-            </div>
-            
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">✉</div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <a href="usmanmustaphahabib52@gmail.com">usmanmustaphahabib52@gmail.com</a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">▶</div>
-                        <div class="contact-details">
-                            <h3>YouTube</h3>
-                            <a href="https://youtube.com/@young_engineer_zunnurain?si=Vhi1L9PMQJtod4PV" target="_blank">@young_engineer_zunnurain?si=Vhi1L9PMQJtod4PV</a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-details">
-                            <h3>Business Inquiries</h3>
-                            <a href="mailto:business@alexteaches.com">business@alexteaches.com</a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <div class="container">
+        <main>
+            <!-- Courses Section -->
+            <section id="courses">
+                <h2 class="section-title">Select a Course</h2>
                 
-                <div class="social-connect">
-                    <h3>Follow My Journey</h3>
-                    <p>Join the community and stay updated with the latest tutorials</p>
-                    <div class="social-links">
-                        <a href="https://youtube.com" target="_blank" class="social-link youtube">
-                            <span>YouTube</span>
+                <ul class="course-list">
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">01</span>
+                            <span class="course-name">Algebra</span>
+                            <span class="course-arrow">→</span>
                         </a>
-                        <a href="https://twitter.com" target="_blank" class="social-link twitter">
-                            <span>Twitter</span>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">02</span>
+                            <span class="course-name">Trigonometry</span>
+                            <span class="course-arrow">→</span>
                         </a>
-                        <a href="https://github.com" target="_blank" class="social-link github">
-                            <span>GitHub</span>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">03</span>
+                            <span class="course-name">Precalculus</span>
+                            <span class="course-arrow">→</span>
                         </a>
-                        <a href="https://linkedin.com" target="_blank" class="social-link linkedin">
-                            <span>LinkedIn</span>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">04</span>
+                            <span class="course-name">Calculus</span>
+                            <span class="course-arrow">→</span>
                         </a>
-                    </div>
-                </div>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">05</span>
+                            <span class="course-name">General Chemistry</span>
+                            <span class="course-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">06</span>
+                            <span class="course-name">Physics</span>
+                            <span class="course-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">07</span>
+                            <span class="course-name">Organic Chemistry</span>
+                            <span class="course-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="course-item">
+                        <a href="#" class="course-link">
+                            <span class="course-number">08</span>
+                            <span class="course-name">Statistics</span>
+                            <span class="course-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="course-item highlight">
+                        <a href="#" class="course-link">
+                            <span class="course-number">09</span>
+                            <span class="course-name">How To Pass Classes</span>
+                            <span class="course-arrow">→</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Membership Banner -->
+            <div class="membership">
+                <h3>Upgrade to Premium</h3>
+                <p>Get access to full-length final exams, worksheets, and exclusive study materials.</p>
+                <a href="#" class="btn">Get Full Access</a>
             </div>
-        </div>
-    </section>
+
+            <!-- Useful Links -->
+            <section class="links-section" id="resources">
+                <h2 class="section-title">Useful Links</h2>
+                
+                <div class="links-grid">
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Final Exam Videos</span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Course Intro Videos</span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Video Playlists</span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Test Prep Videos</span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Medium Articles</span>
+                    </a>
+                    <a href="#" class="link-card">
+                        <span class="link-icon">▶</span>
+                        <span>Formula Sheets</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Patreon Widget -->
+            <div class="widget">
+                <h3 class="widget-title">Support on Patreon</h3>
+                <p class="widget-subtitle">Unlock exclusive content</p>
+                
+                <ul class="feature-list">
+                    <li>Full Length Videos</li>
+                    <li>Exams & Test Prep</li>
+                    <li>Practice Worksheets</li>
+                    <li>Direct Support</li>
+                </ul>
+
+                <div class="triangle-box">
+                    <svg class="triangle" viewBox="0 0 100 80">
+                        <polygon points="10,70 90,70 10,10" />
+                        <text x="45" y="65">a</text>
+                        <text x="75" y="40">b</text>
+                        <text x="30" y="35">c</text>
+                        <rect x="8" y="62" width="6" height="6" fill="none" stroke="#1e3a5f" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <a href="#" class="btn widget-btn">Join Patreon</a>
+            </div>
+
+            <!-- A+ Widget -->
+            <div class="widget" style="text-align: center;">
+                <h3 class="widget-title">Study Strategies</h3>
+                <div class="aplus-circle">A+</div>
+                <p style="font-size: 0.9rem; color: rgba(30, 58, 95, 0.8); margin-bottom: 1rem;">
+                    Learn proven techniques to excel in your exams
+                </p>
+                <a href="#" class="btn widget-btn">Learn More</a>
+            </div>
+
+            <!-- Stats Widget -->
+            <div class="widget" style="text-align: center;">
+                <h3 class="widget-title">Visitors</h3>
+                <div class="stats-number" id="visitorCount">000933264</div>
+                <p style="font-size: 0.85rem; color: rgba(30, 58, 95, 0.6); margin-top: 0.5rem;">
+                    Total website visits
+                </p>
+            </div>
+        </aside>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-icon">▶</span>
-                    <span class="logo-text">Alex Teaches</span>
-                </div>
-                <p class="footer-text">Empowering developers through free, quality education.</p>
-                <div class="footer-social">
-                    <a href="https://youtube.com" target="_blank" aria-label="YouTube">▶</a>
-                    <a href="https://twitter.com" target="_blank" aria-label="Twitter">🐦</a>
-                    <a href="https://github.com" target="_blank" aria-label="GitHub">⚡</a>
-                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">💼</a>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Young Engineer Zunnurain</h4>
+                <p>Dedicated to providing quality education in mathematics, physics, and chemistry. Helping students achieve academic excellence through comprehensive tutorials and resources.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Alex Teaches. All rights reserved.</p>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Formula Sheets</a>
+                <a href="#">Practice Exams</a>
+                <a href="#">Video Library</a>
+                <a href="#">Study Guides</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#">YouTube</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Email Us</a>
             </div>
         </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Young Engineer Zunnurain. All rights reserved.</p>
+            <p class="designer">Designed by SM Graphics Developer</p>
+        </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        // Visitor Counter Animation
+        function animateCounter() {
+            const counter = document.getElementById('visitorCount');
+            const target = 933264;
+            let current = 933200;
+            
+            const interval = setInterval(() => {
+                current += Math.floor(Math.random() * 3);
+                counter.textContent = current.toString().padStart(9, '0');
+                
+                if (current >= target) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        // Run animation when page loads
+        window.addEventListener('load', animateCounter);
+
+        // Simple hover effect for course items
+        document.querySelectorAll('.course-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderLeft = '4px solid #c9a227';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderLeft = '1px solid rgba(30, 58, 95, 0.1)';
+            });
+        });
+    </script>
 </body>
 </html>
