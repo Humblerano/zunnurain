@@ -13,9 +13,9 @@
         }
 
         :root {
-            --primary: #1e3a5f;      /* Deep Navy Blue */
-            --secondary: #ffffff;     /* White */
-            --accent: #c9a227;        /* Gold */
+            --primary: #1e3a5f;
+            --secondary: #ffffff;
+            --accent: #c9a227;
         }
 
         body {
@@ -31,7 +31,7 @@
             padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             box-shadow: 0 2px 10px rgba(30, 58, 95, 0.1);
         }
 
@@ -76,7 +76,7 @@
             letter-spacing: 2px;
         }
 
-        /* Navigation */
+        /* Desktop Navigation */
         .nav-desktop {
             display: flex;
             gap: 2.5rem;
@@ -111,6 +111,7 @@
             width: 100%;
         }
 
+        /* Mobile Menu Toggle Button */
         .menu-toggle {
             display: none;
             background: none;
@@ -118,6 +119,98 @@
             color: var(--secondary);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1002;
+        }
+
+        /* Mobile Menu Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Menu Panel */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--primary);
+            padding: 5rem 2rem 2rem;
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .mobile-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        /* Close Button for Mobile Menu */
+        .close-menu {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-menu:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         /* Hero Section */
@@ -515,89 +608,7 @@
             margin-top: 0.5rem;
         }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background-color: var(--primary);
-            padding: 5rem 2rem 2rem;
-            transition: right 0.3s ease;
-            z-index: 99;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-        }
-
-        .mobile-menu li {
-            margin-bottom: 1.5rem;
-        }
-
-        .mobile-menu a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 98;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-desktop {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Simple Animations */
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -616,9 +627,70 @@
         .course-item:nth-child(7) { animation-delay: 0.7s; }
         .course-item:nth-child(8) { animation-delay: 0.8s; }
         .course-item:nth-child(9) { animation-delay: 0.9s; }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-desktop {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Prevent body scroll when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -640,19 +712,23 @@
                 </ul>
             </nav>
 
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <button class="menu-toggle" id="menuToggle" onclick="openMenu()" aria-label="Open menu">
+                ☰
+            </button>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="closeMenu()" aria-label="Close menu">
+            ✕
+        </button>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#courses" onclick="closeMenu()">Courses</a></li>
+            <li><a href="#resources" onclick="closeMenu()">Resources</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
     </div>
 
@@ -869,11 +945,25 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
+        // Mobile Menu Functions
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.body.classList.add('menu-open');
         }
+
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
 
         // Visitor Counter Animation
         function animateCounter() {
@@ -891,10 +981,9 @@
             }, 100);
         }
 
-        // Run animation when page loads
         window.addEventListener('load', animateCounter);
 
-        // Simple hover effect for course items
+        // Course item hover effects
         document.querySelectorAll('.course-item').forEach(item => {
             item.addEventListener('mouseenter', function() {
                 this.style.borderLeft = '4px solid #c9a227';
